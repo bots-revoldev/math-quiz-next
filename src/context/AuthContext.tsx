@@ -5,12 +5,13 @@ import { registerUser, loginUser } from '@/lib/actions/auth';
 
 interface User {
   email: string;
+  role: string | null;
 }
 
 interface AuthContextType {
   user: User | null;
   login: (email: string, password: string) => Promise<void>;
-  register: (email: string, password: string) => Promise<void>;
+  register: (email: string, password: string) => Promise<any>;
   logout: () => void;
   isLoading: boolean;
 }
@@ -31,9 +32,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const login = async (email: string, password: string) => {
     const result = await loginUser(email, password);
-    if (result.success && result.user) {
-      setUser(result.user);
-      localStorage.setItem('magic_user', JSON.stringify(result.user));
+    if (result.success && 'user' in result && result.user) {
+      const userData = { email: result.user.email, role: result.user.role };
+      setUser(userData);
+      localStorage.setItem('magic_user', JSON.stringify(userData));
     } else {
       throw new Error(result.error);
     }
@@ -41,9 +43,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const register = async (email: string, password: string) => {
     const result = await registerUser(email, password);
-    if (result.success && result.user) {
-      setUser(result.user);
-      localStorage.setItem('magic_user', JSON.stringify(result.user));
+    if (result.success) {
+      if ('user' in result && result.user) {
+        const userData = { email: result.user.email, role: result.user.role || 'wizard' };
+        setUser(userData);
+        localStorage.setItem('magic_user', JSON.stringify(userData));
+      }
+      return result; // Return to handle verification notice in UI
     } else {
       throw new Error(result.error);
     }

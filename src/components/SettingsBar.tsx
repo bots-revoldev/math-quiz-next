@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Sun, Moon, Volume2, LogOut } from 'lucide-react';
+import { Sun, Moon, Volume2, LogOut, Shield } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import styles from './SettingsBar.module.css';
 
@@ -40,6 +40,15 @@ export const SettingsBar: React.FC<SettingsBarProps> = ({
           className={styles.volumeSlider}
         />
       </div>
+      {user?.role === 'admin' && (
+        <a 
+          href="/admin" 
+          className={styles.iconBtn}
+          title="Enter the Magic Council"
+        >
+          <Shield size={24} />
+        </a>
+      )}
       {user && (
         <button 
           onClick={logout} 

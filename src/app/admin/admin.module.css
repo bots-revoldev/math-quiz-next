@@ -1,0 +1,130 @@
+.container {
+  min-height: 100vh;
+  padding: 2rem;
+  background: var(--background);
+  color: var(--text);
+  animation: fadeIn 0.5s ease-out;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+}
+
+.titleGroup {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.titleGroup h1 {
+  font-family: var(--font-fredoka);
+  margin: 0;
+  font-size: 2rem;
+  background: var(--magic-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.icon {
+  color: var(--primary);
+}
+
+.backBtn, .refreshBtn, .actionBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border: none;
+  border-radius: 12px;
+  background: var(--glass-bg);
+  color: var(--text);
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid var(--glass-border);
+}
+
+.backBtn:hover, .refreshBtn:hover {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.2);
+}
+
+.tableContainer {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  text-align: left;
+  padding: 1.25rem;
+  background: rgba(0,0,0,0.05);
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.table td {
+  padding: 1.25rem;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.adminBadge {
+  background: var(--primary);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  width: fit-content;
+}
+
+.wizardBadge {
+  background: rgba(0,0,0,0.1);
+  padding: 0.25rem 0.75rem;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  width: fit-content;
+}
+
+.actionBtn {
+  font-size: 0.85rem;
+  padding: 0.5rem 1rem;
+}
+
+.actionBtn:hover {
+  background: var(--primary);
+  color: white;
+}
+
+.loading {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  font-family: var(--font-fredoka);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
