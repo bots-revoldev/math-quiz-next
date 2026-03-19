@@ -2,6 +2,8 @@
 
 import React from 'react';
 import { TopicCard } from './TopicCard';
+import { useAuth } from '@/context/AuthContext';
+import { Shield } from 'lucide-react';
 import styles from './TopicMenu.module.css';
 
 export type MathTopic = 'addition' | 'subtraction' | 'multiplication' | 'division' | 'mixed';
@@ -11,6 +13,7 @@ interface TopicMenuProps {
 }
 
 export const TopicMenu: React.FC<TopicMenuProps> = ({ onSelect }) => {
+  const { user } = useAuth();
   return (
     <div className={styles.menuContainer}>
       <div className={styles.grid}>
@@ -47,6 +50,12 @@ export const TopicMenu: React.FC<TopicMenuProps> = ({ onSelect }) => {
       <button className={styles.mixedBtn} onClick={() => onSelect('mixed')}>
         <span className={styles.rainbow}>🌈</span> All Topics Mixed!
       </button>
+
+      {user?.role === 'admin' && (
+        <a href="/admin" className={styles.adminLink}>
+          <Shield size={20} /> Access the Magic Council
+        </a>
+      )}
     </div>
   );
 };

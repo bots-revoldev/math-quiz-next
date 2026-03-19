@@ -34,12 +34,13 @@ export default function AdminDashboard() {
   };
 
   useEffect(() => {
-    if (!isLoading && !user) {
-      router.push('/');
+    if (!isLoading) {
+      if (!user) {
+        router.push('/');
+      } else if (user.role !== 'admin') {
+        router.push('/');
+      }
     }
-    // We should also check for admin role here if user object had it
-    // For now, if the user doesn't have the admin role in the object, 
-    // we'll rely on the server action being protected or just common verification
   }, [user, isLoading, router]);
 
   useEffect(() => {
