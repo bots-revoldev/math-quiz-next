@@ -11,9 +11,6 @@ const fredoka = Fredoka({
 export const metadata: Metadata = {
   title: "Math Adventure | Play & Learn!",
   description: "A magical math quiz for young learners",
-  icons: {
-    icon: "/icon.png",
-  },
 };
 
 export default function RootLayout({
