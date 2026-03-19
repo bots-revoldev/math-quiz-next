@@ -4,7 +4,7 @@ import { useState, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { resetPassword } from '@/lib/actions/auth';
 import { Lock, Sparkles, CheckCircle2 } from 'lucide-react';
-import styles from '../components/AuthForms.module.css';
+import styles from '@/components/AuthForms.module.css';
 
 function ResetPasswordContent() {
   const [password, setPassword] = useState('');

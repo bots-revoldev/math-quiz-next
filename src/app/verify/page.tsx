@@ -4,7 +4,7 @@ import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { verifyEmail } from '@/lib/actions/auth';
 import { Sparkles, Loader2, CheckCircle2, XCircle } from 'lucide-react';
-import styles from '../components/AuthForms.module.css';
+import styles from '@/components/AuthForms.module.css';
 
 function VerifyContent() {
   const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
