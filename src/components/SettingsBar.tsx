@@ -1,7 +1,8 @@
 'use client';
 
 import React from 'react';
-import { Sun, Moon, Volume2 } from 'lucide-react';
+import { Sun, Moon, Volume2, LogOut } from 'lucide-react';
+import { useAuth } from '@/context/AuthContext';
 import styles from './SettingsBar.module.css';
 
 interface SettingsBarProps {
@@ -17,6 +18,7 @@ export const SettingsBar: React.FC<SettingsBarProps> = ({
   volume,
   onVolumeChange,
 }) => {
+  const { user, logout } = useAuth();
   return (
     <div className={styles.settingsBar}>
       <button 
@@ -38,6 +40,15 @@ export const SettingsBar: React.FC<SettingsBarProps> = ({
           className={styles.volumeSlider}
         />
       </div>
+      {user && (
+        <button 
+          onClick={logout} 
+          className={styles.iconBtn}
+          title="Logout from the Academy"
+        >
+          <LogOut size={24} />
+        </button>
+      )}
     </div>
   );
 };

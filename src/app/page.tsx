@@ -5,8 +5,11 @@ import { MagicalBackground } from '@/components/MagicalBackground';
 import { SettingsBar } from '@/components/SettingsBar';
 import { QuizGame } from '@/components/QuizGame';
 import { TopicMenu, MathTopic } from '@/components/TopicMenu';
+import { AuthForms } from '@/components/AuthForms';
+import { useAuth } from '@/context/AuthContext';
 
 export default function Home() {
+  const { user, isLoading } = useAuth();
   const [darkMode, setDarkMode] = useState(false);
   const [volume, setVolume] = useState(0.5);
   const [mounted, setMounted] = useState(false);
@@ -40,7 +43,7 @@ export default function Home() {
     localStorage.setItem('volume', v.toString());
   };
 
-  if (!mounted) return null;
+  if (!mounted || isLoading) return null;
 
   return (
     <main style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '2rem 0' }}>
@@ -52,7 +55,9 @@ export default function Home() {
         onVolumeChange={handleVolumeChange} 
       />
       
-      {selectedTopic ? (
+      {!user ? (
+        <AuthForms />
+      ) : selectedTopic ? (
         <QuizGame 
           topic={selectedTopic} 
           volume={volume} 
