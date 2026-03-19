@@ -23,9 +23,9 @@ export async function registerUser(email: string, password: string) {
       isVerified: false,
     });
 
-    // Simulate sending email
+    // Send verification email
     const verificationLink = `http://localhost:5175/verify?token=${verificationToken}`;
-    sendMagicEmail(email, "Welcome to the Magic Academy - Verify Your Email", verificationLink);
+    await sendMagicEmail(email, "Welcome to the Magic Academy - Verify Your Email", verificationLink);
 
     return { success: true, needsVerification: true, email };
   } catch (error: any) {
@@ -90,7 +90,7 @@ export async function requestPasswordReset(email: string) {
       .where(eq(users.id, user.id));
 
     const resetLink = `http://localhost:5175/reset-password?token=${resetToken}`;
-    sendMagicEmail(email, "Magic Academy - Reset Your Secret Password", resetLink);
+    await sendMagicEmail(email, "Magic Academy - Reset Your Secret Password", resetLink);
 
     return { success: true };
   } catch (error: any) {
