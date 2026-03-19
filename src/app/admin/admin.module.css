@@ -124,6 +124,92 @@
   font-family: var(--font-fredoka);
 }
 
+.councilActions {
+  display: flex;
+  margin-bottom: 2rem;
+}
+
+.addBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-family: var(--font-fredoka);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: var(--shadow);
+}
+
+.addBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4);
+}
+
+.addForm {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  animation: slideDown 0.3s ease-out;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.input, .select {
+  padding: 1rem;
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  background: rgba(255,255,255,0.05);
+  color: var(--text);
+  font-family: inherit;
+  outline: none;
+}
+
+.input:focus, .select:focus {
+  border-color: var(--primary);
+  background: rgba(255,255,255,0.1);
+}
+
+.select option {
+  background: #3a2b4d;
+  color: white;
+}
+
+.submitBtn {
+  width: 100%;
+  padding: 1rem;
+  background: var(--magic-gradient);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-family: var(--font-fredoka);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.submitBtn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }

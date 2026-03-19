@@ -1,11 +1,6 @@
-'use client';
-
-import React, { useEffect, useState } from 'react';
-import { useAuth } from '@/context/AuthContext';
-import { useRouter } from 'next/navigation';
-import { getAllUsers, updateUserRole } from '@/lib/actions/admin';
+import { getAllUsers, updateUserRole, addWizard } from '@/lib/actions/admin';
 import styles from './admin.module.css';
-import { Shield, User, Mail, Calendar, ShieldCheck, ArrowLeft, RefreshCw } from 'lucide-react';
+import { Shield, User, Mail, Calendar, ShieldCheck, ArrowLeft, RefreshCw, UserPlus, X } from 'lucide-react';
 
 interface UserData {
   id: number;
@@ -21,6 +16,8 @@ export default function AdminDashboard() {
   const [wizards, setWizards] = useState<UserData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [showAddForm, setShowAddForm] = useState(false);
+  const [newWizard, setNewWizard] = useState({ email: '', password: '', role: 'wizard' });
 
   const fetchWizards = async () => {
     setLoading(true);
@@ -46,6 +43,19 @@ export default function AdminDashboard() {
   useEffect(() => {
     if (user) fetchWizards();
   }, [user]);
+
+  const handleAddEnrollment = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    const res = await addWizard(newWizard.email, newWizard.password, newWizard.role);
+    if (res.success) {
+      setNewWizard({ email: '', password: '', role: 'wizard' });
+      setShowAddForm(false);
+      fetchWizards();
+    } else {
+      setError(res.error || 'Failed to enroll wizard');
+    }
+  };
 
   const handleRoleToggle = async (id: number, currentRole: string | null) => {
     const newRole = currentRole === 'admin' ? 'wizard' : 'admin';
@@ -73,6 +83,50 @@ export default function AdminDashboard() {
           <RefreshCw size={20} /> Refresh
         </button>
       </header>
+
+      <div className={styles.councilActions}>
+        <button 
+          className={styles.addBtn}
+          onClick={() => setShowAddForm(!showAddForm)}
+        >
+          {showAddForm ? <X size={20} /> : <UserPlus size={20} />}
+          {showAddForm ? 'Cancel Enrollment' : 'Enroll New Wizard'}
+        </button>
+      </div>
+
+      {showAddForm && (
+        <form className={styles.addForm} onSubmit={handleAddEnrollment}>
+          <div className={styles.formGrid}>
+            <input 
+              type="email" 
+              placeholder="Wizard Email" 
+              required 
+              value={newWizard.email}
+              onChange={(e) => setNewWizard({ ...newWizard, email: e.target.value })}
+              className={styles.input}
+            />
+            <input 
+              type="password" 
+              placeholder="Magic Password" 
+              required 
+              value={newWizard.password}
+              onChange={(e) => setNewWizard({ ...newWizard, password: e.target.value })}
+              className={styles.input}
+            />
+            <select 
+              value={newWizard.role}
+              onChange={(e) => setNewWizard({ ...newWizard, role: e.target.value })}
+              className={styles.select}
+            >
+              <option value="wizard">Academy Wizard</option>
+              <option value="admin">Council Member</option>
+            </select>
+          </div>
+          <button type="submit" className={styles.submitBtn}>
+            Inscribe into Ledger
+          </button>
+        </form>
+      )}
 
       {error && <div className={styles.error}>{error}</div>}
 

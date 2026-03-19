@@ -31,3 +31,17 @@ export async function updateUserRole(userId: number, newRole: string) {
     return { success: false, error: error.message };
   }
 }
+
+export async function addWizard(email: string, pass: string, role: string) {
+  try {
+    await db.insert(users).values({
+      email,
+      password: pass,
+      role,
+      isVerified: true, // Admin-added users are pre-verified
+    });
+    return { success: true };
+  } catch (error: any) {
+    return { success: false, error: error.message };
+  }
+}
