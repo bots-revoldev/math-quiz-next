@@ -1,0 +1,43 @@
+.settingsBar {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    padding: 0.5rem 1rem;
+    border-radius: 30px;
+    z-index: 10;
+}
+
+:global(body.dark-mode) .settingsBar {
+    background: rgba(0, 0, 0, 0.2);
+    color: #e9d5ff;
+}
+
+.iconBtn {
+    background: none;
+    border: none;
+    color: var(--primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s;
+}
+
+.iconBtn:hover { transform: scale(1.1); }
+
+.volumeControl {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary);
+}
+
+.volumeSlider {
+    width: 80px;
+    cursor: pointer;
+    accent-color: var(--primary);
+}

@@ -1,0 +1,58 @@
+.menuContainer {
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.mixedBtn {
+    width: 100%;
+    padding: 1.5rem;
+    border: none;
+    border-radius: 30px;
+    background: #db2777; /* Deep pink from mockup */
+    color: white;
+    font-size: 2.25rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 10px 0 #be185d, 0 20px 30px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    font-family: inherit;
+}
+
+.mixedBtn:hover {
+    transform: translateY(-4px);
+    background: #e114e5;
+    box-shadow: 0 14px 0 #be185d, 0 25px 35px rgba(0, 0, 0, 0.15);
+}
+
+.mixedBtn:active {
+    transform: translateY(6px);
+    box-shadow: 0 4px 0 #be185d, 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.rainbow {
+    font-size: 2.5rem;
+}
+
+@media (max-width: 600px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .mixedBtn {
+        font-size: 1.5rem;
+        padding: 1.25rem;
+    }
+}

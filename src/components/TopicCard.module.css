@@ -1,0 +1,51 @@
+.card {
+    border: none;
+    border-radius: 30px;
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    width: 100%;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.iconContainer {
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon {
+    font-size: 5rem;
+    color: #9333ea;
+    font-weight: 700;
+    line-height: 1;
+    /* 3D Bubble effect using text-shadow */
+    text-shadow: 
+        1px 1px 0px #7e22ce,
+        2px 2px 0px #7e22ce,
+        3px 3px 0px #7e22ce,
+        4px 4px 10px rgba(0,0,0,0.2);
+}
+
+.title {
+    font-size: 2rem;
+    color: #4c1d95;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.range {
+    font-size: 1.125rem;
+    color: #94a3b8;
+    font-weight: 600;
+}

@@ -1,0 +1,30 @@
+.magicalBackground {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.star, .cloud {
+    position: absolute;
+    opacity: 0.6;
+}
+
+.s1 { top: 10%; left: 15%; font-size: 2rem; animation: pulse 3s infinite; }
+.s2 { top: 20%; right: 20%; font-size: 1.5rem; animation: pulse 4s infinite 1s; }
+.s3 { bottom: 15%; left: 25%; font-size: 2.5rem; animation: pulse 5s infinite; }
+.c1 { top: 5%; left: 40%; font-size: 4rem; animation: drift 20s infinite linear; }
+.c2 { bottom: 10%; right: 10%; font-size: 5rem; animation: drift 25s reverse infinite linear; }
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.3); opacity: 1; }
+}
+
+@keyframes drift {
+    from { transform: translateX(-100vw); }
+    to { transform: translateX(100vw); }
+}
