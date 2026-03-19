@@ -1,6 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { registerUser, loginUser } from '@/lib/actions/auth';
 
 interface User {
   email: string;
@@ -29,31 +30,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const login = async (email: string, password: string) => {
-    // Basic simulation: Check against localStorage users
-    const users = JSON.parse(localStorage.getItem('magic_registered_users') || '[]');
-    const foundUser = users.find((u: any) => u.email === email && u.password === password);
-    
-    if (foundUser) {
-      const sessionUser = { email };
-      setUser(sessionUser);
-      localStorage.setItem('magic_user', JSON.stringify(sessionUser));
+    const result = await loginUser(email, password);
+    if (result.success && result.user) {
+      setUser(result.user);
+      localStorage.setItem('magic_user', JSON.stringify(result.user));
     } else {
-      throw new Error('Invalid email or password! Try again magic user! ✨');
+      throw new Error(result.error);
     }
   };
 
   const register = async (email: string, password: string) => {
-    const users = JSON.parse(localStorage.getItem('magic_registered_users') || '[]');
-    if (users.find((u: any) => u.email === email)) {
-      throw new Error('This email is already part of the magic academy! 🪄');
+    const result = await registerUser(email, password);
+    if (result.success && result.user) {
+      setUser(result.user);
+      localStorage.setItem('magic_user', JSON.stringify(result.user));
+    } else {
+      throw new Error(result.error);
     }
-    
-    users.push({ email, password });
-    localStorage.setItem('magic_registered_users', JSON.stringify(users));
-    
-    const sessionUser = { email };
-    setUser(sessionUser);
-    localStorage.setItem('magic_user', JSON.stringify(sessionUser));
   };
 
   const logout = () => {
