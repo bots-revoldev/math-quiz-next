@@ -69,7 +69,7 @@ export async function loginUser(email: string, password: string) {
       throw new Error("Your magic essence is not yet verified! Check your email! ✉️");
     }
 
-    return { success: true, user: { email: user.email } };
+    return { success: true, user: { email: user.email, role: user.role } };
   } catch (error: any) {
     return { success: false, error: error.message };
   }
