@@ -4,5 +4,8 @@ export const users = sqliteTable("users", {
   id: integer("id").primaryKey({ autoIncrement: true }),
   email: text("email").notNull().unique(),
   password: text("password").notNull(),
+  isVerified: integer("is_verified", { mode: "boolean" }).default(false),
+  verificationToken: text("verification_token"),
+  resetToken: text("reset_token"),
   createdAt: text("created_at").default(new Date().toISOString()),
 });
